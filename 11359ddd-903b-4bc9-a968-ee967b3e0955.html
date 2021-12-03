@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>SWAT: Elite Force</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('11359ddd-903b-4bc9-a968-ee967b3e0955/7f4ba768-b0ff-4bb1-a149-ffc89f8e8b64.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img alt="icon" Height="48" class="lozad" data-src="11359ddd-903b-4bc9-a968-ee967b3e0955/9e295a71-d4b3-4a58-9000-838f2ba41281.png"/> SWAT: Elite Force</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img alt="cover" Height="175" class="lozad" data-src="11359ddd-903b-4bc9-a968-ee967b3e0955/adf56390-f1e5-427a-a819-a83f1ecfc6e8.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>1h 37m 7s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-11-09-2021">11-09-2021</a> 10:59:32</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-10-05-2021">10-05-2021</a> 10:27:55</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-23-11-2021">23-11-2021</a> 11:13:23</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Gog">Gog</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-GOG">GOG</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-03-09-2016">03-09-2016</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="#quicklink-89">89</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/><a href="default_genre_ascending_name_ascending.html#quicklink-Strategy">Strategy</a><br/><a href="default_genre_ascending_name_ascending.html#quicklink-Tactical">Tactical</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="#quicklink-Eezstreet">Eezstreet</a><br/><a href="#quicklink-Irrational Games">Irrational Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="#quicklink-Activision">Activision</a><br/><a href="#quicklink-Eezstreet">Eezstreet</a><br/><a href="#quicklink-Sierra Entertainment">Sierra Entertainment</a><br/><a href="#quicklink-Vivendi Universal">Vivendi Universal</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default_feature_ascending_name_ascending.html#quicklink-Co-Op">Co-Op</a><br/><a href="default_feature_ascending_name_ascending.html#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="default_feature_ascending_name_ascending.html#quicklink-Keyboard/Mouse">Keyboard/Mouse</a><br/><a href="default_feature_ascending_name_ascending.html#quicklink-LAN Co-Op">LAN Co-Op</a><br/><a href="default_feature_ascending_name_ascending.html#quicklink-LAN Multi-player">LAN Multi-player</a><br/><a href="default_feature_ascending_name_ascending.html#quicklink-LAN PvP">LAN PvP</a><br/><a href="default_feature_ascending_name_ascending.html#quicklink-Multi-Player">Multi-Player</a><br/><a href="default_feature_ascending_name_ascending.html#quicklink-Online Co-Op">Online Co-Op</a><br/><a href="default_feature_ascending_name_ascending.html#quicklink-Online Multi-player">Online Multi-player</a><br/><a href="default_feature_ascending_name_ascending.html#quicklink-Online PvP">Online PvP</a><br/><a href="default_feature_ascending_name_ascending.html#quicklink-PvP">PvP</a><br/><a href="default_feature_ascending_name_ascending.html#quicklink-Single-Player">Single-Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Crime">Crime</a><br/><a href="#quicklink-Mod">Mod</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					SWAT: Elite Force is a massive overhaul of SWAT 4: The Stetchkov Syndicate, turning it into a more realistic tactical police simulator.
+<h3>Features</h3>
+The following is a non-exhaustive list of features. Refer to the Readme for the complete list of changes.
+<ul>
+<li><strong>Over 40 new pieces of equipment</strong>, including equipment cut from the original game, suppressed versions of the original weapons, grenade and wedge 3-packs, and new equipment entirely. There's more than twice as many types of ammo from the original game. Weapons are categorized by family (Assault Rifles, Submachine Guns, etc) in the interface, so as to be easy to select.</li>
+<li><strong>...and it's more realistic equipment, too. </strong>Less lethal equipment is truly less lethal, not non-lethal. Tasers can kill the elderly and drug users, or those in poor health. Beanbags can break bones and fatally injure at close range. Bullets can realistically ricochet off of surfaces. Ceramic-plate armor breaks and degrades as more bullet holes punch into it. Lightsticks can be tossed across the room, or simply dropped at your feet, much like SWAT 3. Everything you pack contributes to Weight and Bulk. Weight, how heavy your equipment is, reduces your movement speed. Bulk, how large your equipment is, reduces your interaction, weapon changing, and reload speeds. Too much stuff, and you won't be able to play.</li>
+<li><strong>The original SWAT 4 and Stetchkov Syndicate campaigns, combined into one. </strong>There is a refined unlocks system, designed to make the campaign more enjoyable to play.</li>
+<li><strong>A second campaign. </strong>The new Extra Missions campaign will be adding cut missions, newly created missions, and curated custom levels with scripted encounters, new blueprints, and custom voice acting.</li>
+<li><strong>All Missions Campaign. </strong>In an All Missions campaign, you can load all of the missions from your hard drive (including custom missions) and play them through in singleplayer, with the AI.</li>
+<li><strong>Permadeath Modes. </strong>When creating a campaign, you can turn on Permadeath for either yourself or your squad members. With AI Permadeath, when your squad members become incapacitated, they are out of the fight for good. With Player Permadeath, if you die, your campaign is over.</li>
+<li><strong>Campaign CO-OP. </strong>Help your friends complete their campaign. As you complete missions together, more equipment becomes unlocked, just like in singleplayer.</li>
+<li><strong>Ironsights. </strong>Hitting the Zoom key will switch to fully 3D ironsights for improved accuracy. This feature can be disabled however, for the original game's zoom function. (Weapons with a scope will use that instead of ironsights)</li>
+<li><strong>Overhauled AI. </strong>The officer AI is much more deadly and efficient now. There are a number of new commands that can be issued to them, including <em>Leader Throw and Clear, </em>which allows you to be the one to throw the grenade of your choice. Or <em>Search and Secure, </em>which orders the officers to restrain civilians and collect evidence in an area around the player. Civilians restrained by officers are reported to TOC. Suspects have been altered too and given distinct personalities. Insane suspects for example will shoot at hostages without hesitation. Suspects may shoot at the player while fleeing from them. Lastly, hostages have been altered too, and may choose to give up easier when witnessing someone else become tased or pepper-sprayed.</li>
+<li><strong>Order your squad through your voice. </strong>A cut feature from the game, you can order your AI squad members using an attached microphone and the Microsoft Speech Recognition API. Instead of navigating an interface to find the breaching command you want, just say "Breach, Bang, and Clear."</li>
+<li><strong>Altered door mechanics. </strong>Doors can be breached with any shotgun, however the effectiveness depends upon which shotgun is taken (the M870 Breaching will always breach 100% of the time) and what ammo is taken. Broken doors can be closed, and wedged. Doors can be locked by the player by using the toolkit on the doorknob. Doors can be checked if they're locked using the melee key. Some doors may have traps on them, which may force you to take alternate routes.</li>
+<li><strong>Side Objectives. </strong>Some levels may have drug evidence on them, which may be collected for additional points. On some levels, incapacitated civilians may bleed out and die, which may penalize your score slightly.</li>
+<li><strong>Multiplayer Improvements. </strong>There is a totally overhauled and deep admin system, with more than just a simple administrator password. Chatting now displays the name of the room that the message was given in. Snipers work in multiplayer and can be controlled to shoot by the leader of a team. There is now a "Not Ready" button which makes you unready. There are new types of votes that can be held, and at the end of a round, the menu will display the next map name.</li>
+<li><strong>Quality of Life changes. </strong>You can now change your FOV with an FOV slider. Mission dispatches can be disabled. Most modern resolutions are supported without bugs. The crosshairs can be disabled. Whenever anything important occurs, like a penalty or an objective completion, the player is notified of it. Your stats in singleplayer are tracked and visible from the Campaign screen. Maps on the Host Game menu can be filtered. There are simply too many minor things to list here.</li>
+<li><strong>Bugs fixed. </strong>Over 100 lines of dialogue which never played in the original game due to bugs or missing content have been restored. And that's just the tip of the iceberg. Most of the bugs that were fixed were from the expansion, which was quickly rushed out the door.</li>
+</ul>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
