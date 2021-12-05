@@ -1,2 +1,0 @@
-# Playnite
-Games library.
